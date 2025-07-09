@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holaaa desde mi pensamiento</title>
+    <!-- Enlace a Tailwind CSS para un estilo rápido y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif; /* Usando la fuente Inter */
+            background-color: #f0fdf4; /* Un fondo verde muy claro */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        /* Estilos personalizados para la animación de la imagen del oso */
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            70% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        .animate-bounce-in {
+            animation: bounce-in 0.8s ease-out forwards;
+        }
+        /* Estilos para el SVG del oso pardo */
+        .bear-svg { /* Cambiado de .panda-svg a .bear-svg para reflejar el cambio */
+            width: 150px; /* Ajusta el tamaño del SVG */
+            height: 150px;
+            border-radius: 9999px; /* Para hacerlo circular como la imagen anterior */
+            border: 4px solid #d4a779; /* Borde marrón claro para el oso pardo */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Sombra */
+            animation: bounce-in 0.8s ease-out forwards;
+            display: block; /* Asegura que no haya espacio extra debajo del SVG */
+            margin-bottom: 1.5rem; /* Espacio debajo del SVG */
+        }
+        .ai-output {
+            background-color: #fffbeb; /* Fondo amarillo muy claro para la salida de IA */
+            border-left: 4px solid #f59e0b; /* Borde amarillo para resaltar */
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-style: italic;
+            color: #78350f; /* Texto marrón oscuro */
+            min-height: 50px; /* Altura mínima para el área de salida */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .button-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap; /* Permite que los botones se envuelvan en pantallas pequeñas */
+            justify-content: center;
+        }
+        .gemini-button {
+            background-color: #3b82f6; /* Azul de Tailwind */
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .gemini-button:hover {
+            background-color: #2563eb; /* Azul más oscuro al pasar el ratón */
+            transform: translateY(-2px);
+        }
+        .gemini-button:active {
+            background-color: #1d4ed8; /* Azul aún más oscuro al hacer clic */
+            transform: translateY(0);
+        }
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #3b82f6;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            display: none; /* Oculto por defecto */
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="bg-white rounded-2xl shadow-xl p-8 max-w-sm mx-auto flex flex-col items-center justify-center space-y-6 transform transition-all duration-300 hover:scale-105">
+        <!-- SVG del oso pardo tierno -->
+        <svg class="bear-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Cuerpo y cabeza del oso pardo -->
+            <circle cx="12" cy="12" r="10" fill="#8B4513"/> <!-- Cuerpo principal marrón -->
+            <!-- Hocico -->
+            <circle cx="12" cy="14.5" r="3.5" fill="#D2B48C"/> <!-- Hocico más grande y claro -->
+            <!-- Nariz -->
+            <circle cx="12" cy="13.5" r="1.2" fill="#000000"/> <!-- Nariz negra -->
+            <!-- Ojos -->
+            <circle cx="9" cy="9.5" r="1" fill="#FFFFFF"/>
+            <circle cx="15" cy="9.5" r="1" fill="#FFFFFF"/>
+            <circle cx="9" cy="9.5" r="0.5" fill="#000000"/>
+            <circle cx="15" cy="9.5" r="0.5" fill="#000000"/>
+            <!-- Orejas -->
+            <circle cx="7" cy="5" r="2.5" fill="#8B4513"/>
+            <circle cx="17" cy="5" r="2.5" fill="#8B4513"/>
+            <circle cx="7" cy="5" r="1.5" fill="#D2B48C"/>
+            <circle cx="17" cy="5" r="1.5" fill="#D2B48C"/>
+            <!-- Boca (línea simple) -->
+            <path d="M10.5 15.5 C11 16.5 13 16.5 13.5 15.5" stroke="#000000" stroke-width="0.5" stroke-linecap="round"/>
+        </svg>
+        
+        <!-- Título actualizado -->
+        <h1 class="text-4xl font-extrabold text-green-700">Holaaa desde mi pensamiento</h1>
+        
+        <!-- Mensaje actualizado -->
+        <p class="text-lg text-gray-700 text-center leading-relaxed">
+            Tu mejor amiguito amigable, solo quería saludarte. Espero que hayas tenido un día maravilloso como la primavera de tus ojos.
+        </p>
+        
+        <!-- Contenedor para la salida de la IA -->
+        <div id="aiOutput" class="ai-output w-full">
+            <!-- Aquí aparecerá el contenido generado por la IA -->
+            <p>Haz clic en un botón para que el oso te diga algo interesante.</p>
+        </div>
+
+        <!-- Spinner de carga -->
+        <div id="loadingSpinner" class="loading-spinner"></div>
+
+        <!-- Grupo de botones para las funciones de IA -->
+        <div class="button-group">
+            <button id="factButton" class="gemini-button">✨ Generar dulces</button>
+            <button id="storyButton" class="gemini-button">Te quiero mucho primero 🤗💖</button>
+        </div>
+
+        <!-- Firma actualizada -->
+        <div class="signature text-right w-full mt-4">
+            <p class="text-md italic text-gray-600">Att. mejor amiguito 🥰</p>
+        </div>
+    </div>
+
+    <script type="module">
+        // Variables globales necesarias para el entorno de Canvas/Firebase
+        // Aunque Firebase no se usa directamente para la API de Gemini aquí,
+        // estas variables son parte del setup estándar del entorno.
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        // Referencias a elementos del DOM
+        const aiOutputDiv = document.getElementById('aiOutput');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const factButton = document.getElementById('factButton');
+        const storyButton = document.getElementById('storyButton');
+
+        // Array de poemas para Victoria
+        const poemasVictoria = [
+            "Victoria, luz de mi sendero,\ncon tu sonrisa, el mundo es más sincero.\nAmistad que brilla, amor que no tiene fin,\neres la estrella que guía mi jardín.",
+            "En cada risa, un dulce despertar,\nVictoria, tu esencia me hace soñar.\nAmiga leal, corazón de oro puro,\nen tu amistad, mi refugio seguro.",
+            "Como flor en primavera, así eres tú,\nVictoria, un rayo de pura luz.\nTu bondad es un canto, tu alma un cristal,\nmi mejor amiguita, sin igual.",
+            "Victoria, nombre que rima con alegría,\nen cada instante, llenas de magia mi día.\nUn tesoro eres, un regalo del cielo,\ncontigo a mi lado, no hay desconsuelo.",
+            "De tu amistad, un dulce manantial,\nVictoria, eres mi cómplice ideal.\nQue la vida te colme de amor y de paz,\nmi amiguita querida, por siempre jamás."
+        ];
+        let poemaIndex = 0; // Índice para llevar la cuenta del poema actual
+
+        // Array de textos "Te quiero mucho" para Victoria
+        const teQuieroMuchoTexts = [
+            `Flakita hermosa, la mejor, la que hace brillar las mañanas. ✨ Eres un sol en mi vida, y estos 2 años de amistad han sido el regalo más preciado. Siempre has sido la mejor, mi compañera incondicional.`,
+            `Mi flakita hermosa, cada aventura contigo es como cruzar el portal de los abrazos más cálidos. 🤗 Aunque a veces estemos bravos, mi cariño por ti nunca cambia, siempre te voy a seguir queriendo. Y por favor, nunca te olvides de mí, porque eres la mejor. Te quiero un montón. 🥰💖`
+        ];
+        let teQuieroMuchoIndex = 0; // Índice para llevar la cuenta del texto actual
+
+        /**
+         * Llama a la API de Gemini para generar contenido.
+         * @param {string} prompt El prompt a enviar al modelo.
+         * @returns {Promise<string>} La respuesta generada por el LLM.
+         */
+        async function callGeminiAPI(prompt) {
+            loadingSpinner.style.display = 'block'; // Mostrar spinner
+            aiOutputDiv.innerHTML = '<p>Pensando...</p>'; // Mensaje de carga
+
+            let chatHistory = [];
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+            const payload = { contents: chatHistory };
+            const apiKey = ""; // La clave API se inyecta automáticamente en el entorno de Canvas.
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    return result.candidates[0].content.parts[0].text;
+                } else {
+                    console.error("Estructura de respuesta inesperada:", result);
+                    return "Lo siento, no pude generar una respuesta. Inténtalo de nuevo.";
+                }
+            } catch (error) {
+                console.error("Error al llamar a la API de Gemini:", error);
+                return "Hubo un error al conectar con la IA. Por favor, inténtalo más tarde.";
+            } finally {
+                loadingSpinner.style.display = 'none'; // Ocultar spinner
+            }
+        }
+
+        // Event listener para el botón "Generar dulces" (poemas)
+        factButton.addEventListener('click', async () => {
+            loadingSpinner.style.display = 'block'; // Mostrar spinner
+            aiOutputDiv.innerHTML = '<p>Generando un dulce poema...</p>'; // Mensaje de carga
+
+            // Mostrar el poema actual
+            aiOutputDiv.innerHTML = `<p>${poemasVictoria[poemaIndex].replace(/\n/g, '<br>')}</p>`;
+            
+            // Incrementar el índice y reiniciarlo si llega al final del array
+            poemaIndex = (poemaIndex + 1) % poemasVictoria.length;
+
+            loadingSpinner.style.display = 'none'; // Ocultar spinner
+        });
+
+        // Event listener para el botón "Te quiero mucho primero" (mensajes personalizados)
+        storyButton.addEventListener('click', async () => {
+            loadingSpinner.style.display = 'block'; // Mostrar spinner
+            aiOutputDiv.innerHTML = '<p>Preparando un mensaje especial...</p>'; // Mensaje de carga
+
+            // Mostrar el texto "Te quiero mucho" actual
+            // Convertir saltos de línea a <br> para HTML
+            aiOutputDiv.innerHTML = `<p>${teQuieroMuchoTexts[teQuieroMuchoIndex].replace(/\n/g, '<br>')}</p>`;
+            
+            // Incrementar el índice y reiniciarlo si llega al final del array
+            teQuieroMuchoIndex = (teQuieroMuchoIndex + 1) % teQuieroMuchoTexts.length;
+
+            loadingSpinner.style.display = 'none'; // Ocultar spinner
+        });
+
+        // Inicialización (si fuera necesario para Firebase, pero no para Gemini API directamente)
+        // Puedes añadir aquí la inicialización de Firebase si tu app necesitara persistencia de datos.
+        // Por ejemplo:
+        /*
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        
+        if (Object.keys(firebaseConfig).length > 0) {
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+            if (initialAuthToken) {
+                signInWithCustomToken(auth, initialAuthToken).catch(console.error);
+            } else {
+                signInAnonymously(auth).catch(console.error);
+            }
+        }
+        */
+    </script>
+
+</body>
+</html>
